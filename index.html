@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Self — Kamal Abbas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'inter': ['Inter', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Inter', sans-serif; font-feature-settings: "cv02", "cv03", "cv04", "cv11"; }
+        html { scroll-behavior: smooth; }
+        body { background: #000; color: #fff; }
+        ::selection { background: rgba(239,68,68,0.3); color: #fecaca; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: blur(10px);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to bottom, #FFFFFF, #FFFFFF, rgba(255,255,255,0.5));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-gradient {
+            background: linear-gradient(135deg, #EF4444, #F87171);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-hover {
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            border-color: rgba(255,255,255,0.12);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .glow-red {
+            background: radial-gradient(ellipse at center, rgba(239,68,68,0.15), transparent 70%);
+        }
+
+        .timeline-line {
+            background: linear-gradient(to bottom, #EF4444, rgba(239,68,68,0.1));
+        }
+
+        .pulse-dot {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            50% { opacity: 0.5; }
+        }
+
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: #EF4444;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .photo-frame {
+            position: relative;
+        }
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, #EF4444, #F87171, #EF4444);
+            z-index: -1;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .photo-frame:hover::before {
+            opacity: 1;
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        .stat-number {
+            background: linear-gradient(to bottom, #FFFFFF, rgba(255,255,255,0.7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+        }
+
+        .mountain-bg {
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, #000 100%),
+                        url('https://picsum.photos/seed/gilgit-mountains/1600/900.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="font-inter antialiased">
+
+    <!-- Ambient Glow -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] glow-red opacity-30 pointer-events-none mix-blend-screen z-0"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 h-16 border-b border-white/[0.06] nav-blur bg-black/70">
+        <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative">
+                    <svg width="36" height="36" viewBox="0 0 36 36" class="text-white group-hover:text-red-500 transition-colors duration-500">
+                        <circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                        <text x="18" y="23" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">K</text>
+                    </svg>
+                    <div class="absolute inset-0 blur-[10px] bg-red-500 opacity-0 group-hover:opacity-60 transition-opacity duration-500"></div>
+                </div>
+                <span class="text-sm font-semibold tracking-tight">MY SELF</span>
+            </a>
+
+            <!-- Nav Links -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="text-sm text-slate-400 hover:text-white transition-colors duration-300">About</a>
+                <a href="#education" class="text-sm text-slate-400 hover:text-white transition-colors duration-300">Education</a>
+                <a href="#skills" class="text-sm text-slate-400 hover:text-white transition-colors duration-300">Skills</a>
+                <a href="#homeland" class="text-sm text-slate-400 hover:text-white transition-colors duration-300">Homeland</a>
+                <a href="#colleague" class="text-sm text-slate-400 hover:text-white transition-colors duration-300">Colleague</a>
+                <a href="#contact" class="text-sm bg-white text-black px-4 py-2 rounded-full font-medium hover:bg-slate-200 transition-all duration-150">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-white">
+                <span class="iconify" data-icon="lucide:menu" data-width="24"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 z-40 bg-black/95 nav-blur hidden flex-col items-center justify-center gap-6">
+        <button id="mobileMenuClose" class="absolute top-5 right-6 text-white">
+            <span class="iconify" data-icon="lucide:x" data-width="24"></span>
+        </button>
+        <a href="#about" class="text-xl text-white mobile-link">About</a>
+        <a href="#education" class="text-xl text-white mobile-link">Education</a>
+        <a href="#skills" class="text-xl text-white mobile-link">Skills</a>
+        <a href="#homeland" class="text-xl text-white mobile-link">Homeland</a>
+        <a href="#colleague" class="text-xl text-white mobile-link">Colleague</a>
+        <a href="#contact" class="text-xl text-white mobile-link">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <!-- Badge -->
+            <div class="reveal inline-flex items-center gap-2 border border-white/[0.1] rounded-full px-4 py-2 mb-8">
+                <span class="w-2 h-2 rounded-full bg-red-500 pulse-dot"></span>
+                <span class="text-xs font-medium text-slate-300 tracking-wide uppercase">Available for Opportunities</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="reveal hero-gradient text-5xl md:text-7xl font-semibold tracking-tighter leading-[1] mb-6" style="transition-delay: 100ms;">
+                Kamal Abbas
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="reveal text-lg md:text-xl font-light text-slate-300 tracking-wide max-w-2xl mx-auto mb-4" style="transition-delay: 200ms;">
+                Developer <span class="text-red-500">·</span> Problem Solver <span class="text-red-500">·</span> Mountain Soul
+            </p>
+
+            <p class="reveal text-base font-light text-slate-500 max-w-xl mx-auto mb-10" style="transition-delay: 300ms;">
+                From the breathtaking mountains of Gilgit-Baltistan to the dynamic city of Karachi — building the future through code.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4" style="transition-delay: 400ms;">
+                <a href="#about" class="bg-white text-black px-8 py-3.5 rounded-full text-sm font-semibold hover:bg-slate-200 transition-all duration-150 flex items-center gap-2 group">
+                    Explore My Journey
+                    <span class="iconify group-hover:translate-x-0.5 transition-transform" data-icon="lucide:arrow-down" data-width="14"></span>
+                </a>
+                <a href="#contact" class="border border-white/[0.1] text-white px-8 py-3.5 rounded-full text-sm font-medium hover:border-white/[0.2] transition-all duration-150 flex items-center gap-2">
+                    <span class="iconify" data-icon="lucide:mail" data-width="14"></span>
+                    Get in Touch
+                </a>
+            </div>
+
+            <!-- Profile Photo -->
+            <div class="reveal mt-16 flex justify-center" style="transition-delay: 500ms;">
+                <div class="photo-frame inline-block rounded-2xl overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/8980d89e-0cba-4d1c-aa3f-8ec167766d6f.png?auth_key=1884418802-1d69476eaccf407b9d54a373b83341d8-0-5e7ed22ed115b9bb7cc209f990cfbd21" 
+                         alt="Kamal Abbas" 
+                         class="w-48 h-48 md:w-56 md:h-56 object-cover rounded-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="reveal border-y border-white/[0.06]">
+        <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="stat-number text-3xl md:text-4xl font-semibold tracking-tight">2022</div>
+                <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Matriculated</div>
+            </div>
+            <div class="text-center">
+                <div class="stat-number text-3xl md:text-4xl font-semibold tracking-tight">2024</div>
+                <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Intermediate</div>
+            </div>
+            <div class="text-center">
+                <div class="stat-number text-3xl md:text-4xl font-semibold tracking-tight">3+</div>
+                <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Cities Lived</div>
+            </div>
+            <div class="text-center">
+                <div class="stat-number text-3xl md:text-4xl font-semibold tracking-tight">∞</div>
+                <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Passion for Code</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+                <!-- Photo -->
+                <div class="reveal">
+                    <div class="relative">
+                        <div class="photo-frame rounded-2xl overflow-hidden">
+                            <img src="https://z-cdn-media.chatglm.cn/files/8980d89e-0cba-4d1c-aa3f-8ec167766d6f.png?auth_key=1884418802-1d69476eaccf407b9d54a373b83341d8-0-5e7ed22ed115b9bb7cc209f990cfbd21" 
+                                 alt="Kamal Abbas" 
+                                 class="w-full aspect-[4/5] object-cover rounded-2xl">
+                        </div>
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-4 -right-4 bg-red-600 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-lg shadow-red-600/20 float-anim">
+                            <span class="iconify inline-block mr-1" data-icon="lucide:code-2" data-width="12"></span>
+                            Developer
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div>
+                    <div class="reveal">
+                        <span class="text-xs font-mono text-red-500 tracking-wider uppercase">01 — About Me</span>
+                    </div>
+                    <h2 class="reveal text-3xl md:text-5xl font-semibold tracking-tight mt-4 mb-6 hero-gradient" style="transition-delay: 100ms;">
+                        Hello & Thanks<br>for Visiting!
+                    </h2>
+                    <p class="reveal text-base md:text-lg font-light text-slate-300 leading-relaxed mb-6" style="transition-delay: 200ms;">
+                        I'm <strong class="text-white font-medium">Kamal Abbas</strong>, originally from the breathtaking region of <strong class="text-white font-medium">Gilgit-Baltistan</strong>. Nestled among towering mountains and stunning landscapes, Gilgit-Baltistan is truly a paradise on Earth, and I can't wait to share a glimpse of it with you.
+                    </p>
+                    <p class="reveal text-base md:text-lg font-light text-slate-400 leading-relaxed mb-8" style="transition-delay: 300ms;">
+                        A little about my journey: I completed my matriculation in 2022, then moved to Rawalpindi for my intermediate studies, which I completed in 2024 with a focus on Mathematics. Now I'm currently in Karachi, diving deeper into my education and developing my skills in programming.
+                    </p>
+
+                    <!-- Quick Info -->
+                    <div class="reveal grid grid-cols-2 gap-4" style="transition-delay: 400ms;">
+                        <div class="border border-white/[0.06] rounded-xl p-4">
+                            <div class="text-xs text-slate-500 uppercase tracking-wider mb-1">Location</div>
+                            <div class="text-sm font-medium text-white flex items-center gap-2">
+                                <span class="iconify text-red-500" data-icon="lucide:map-pin" data-width="14"></span>
+                                Karachi, Pakistan
+                            </div>
+                        </div>
+                        <div class="border border-white/[0.06] rounded-xl p-4">
+                            <div class="text-xs text-slate-500 uppercase tracking-wider mb-1">Origin</div>
+                            <div class="text-sm font-medium text-white flex items-center gap-2">
+                                <span class="iconify text-red-500" data-icon="lucide:mountain" data-width="14"></span>
+                                Gilgit-Baltistan
+                            </div>
+                        </div>
+                        <div class="border border-white/[0.06] rounded-xl p-4">
+                            <div class="text-xs text-slate-500 uppercase tracking-wider mb-1">Focus</div>
+                            <div class="text-sm font-medium text-white flex items-center gap-2">
+                                <span class="iconify text-red-500" data-icon="lucide:calculator" data-width="14"></span>
+                                Mathematics
+                            </div>
+                        </div>
+                        <div class="border border-white/[0.06] rounded-xl p-4">
+                            <div class="text-xs text-slate-500 uppercase tracking-wider mb-1">Passion</div>
+                            <div class="text-sm font-medium text-white flex items-center gap-2">
+                                <span class="iconify text-red-500" data-icon="lucide:terminal" data-width="14"></span>
+                                Programming
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- Education Timeline -->
+    <section id="education" class="py-24 md:py-32">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="reveal text-xs font-mono text-red-500 tracking-wider uppercase">02 — Education</span>
+                <h2 class="reveal text-3xl md:text-5xl font-semibold tracking-tight mt-4 hero-gradient" style="transition-delay: 100ms;">
+                    My Journey
+                </h2>
+                <p class="reveal text-base font-light text-slate-400 mt-4 max-w-xl mx-auto" style="transition-delay: 200ms;">
+                    From the mountains to the metropolis — every step shaped who I am.
+                </p>
+            </div>
+
+            <!-- Timeline -->
+            <div class="relative">
+                <!-- Line -->
+                <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-px timeline-line md:-translate-x-px"></div>
+
+                <!-- Item 1 -->
+                <div class="reveal relative flex flex-col md:flex-row items-start mb-12 md:mb-16">
+                    <div class="md:w-1/2 md:pr-12 md:text-right pl-16 md:pl-0">
+                        <div class="border border-white/[0.06] rounded-2xl p-6 md:p-8 card-hover bg-white/[0.02]">
+                            <span class="text-xs font-mono text-red-500">2022</span>
+                            <h3 class="text-xl font-medium tracking-tight mt-2 mb-3">Matriculation</h3>
+                            <p class="text-sm font-light text-slate-400 leading-relaxed">
+                                Completed my matriculation from Gilgit-Baltistan, building a strong academic foundation amidst the stunning mountain scenery that shaped my early perspective.
+                            </p>
+                            <div class="flex items-center gap-2 mt-4 md:justify-end">
+                                <span class="iconify text-slate-500" data-icon="lucide:graduation-cap" data-width="14"></span>
+                                <span class="text-xs text-slate-500">Science Group</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Dot -->
+                    <div class="absolute left-6 md:left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-red-500 ring-4 ring-black mt-8"></div>
+                    <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="reveal relative flex flex-col md:flex-row items-start mb-12 md:mb-16" style="transition-delay: 150ms;">
+                    <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+                    <!-- Dot -->
+                    <div class="absolute left-6 md:left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-red-500 ring-4 ring-black mt-8"></div>
+                    <div class="md:w-1/2 md:pl-12 pl-16">
+                        <div class="border border-white/[0.06] rounded-2xl p-6 md:p-8 card-hover bg-white/[0.02]">
+                            <span class="text-xs font-mono text-red-500">2022 — 2024</span>
+                            <h3 class="text-xl font-medium tracking-tight mt-2 mb-3">Intermediate (FSc)</h3>
+                            <p class="text-sm font-light text-slate-400 leading-relaxed">
+                                Moved to Rawalpindi for intermediate studies with a focus on Mathematics. This period taught me independence, adaptability, and deepened my analytical thinking.
+                            </p>
+                            <div class="flex items-center gap-2 mt-4">
+                                <span class="iconify text-slate-500" data-icon="lucide:calculator" data-width="14"></span>
+                                <span class="text-xs text-slate-500">Pre-Engineering / Mathematics</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="reveal relative flex flex-col md:flex-row items-start" style="transition-delay: 300ms;">
+                    <div class="md:w-1/2 md:pr-12 md:text-right pl-16 md:pl-0">
+                        <div class="border border-white/[0.06] rounded-2xl p-6 md:p-8 card-hover bg-white/[0.02] relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-2 h-full bg-red-500"></div>
+                            <span class="text-xs font-mono text-red-500">2024 — Present</span>
+                            <h3 class="text-xl font-medium tracking-tight mt-2 mb-3">Programming & CS</h3>
+                            <p class="text-sm font-light text-slate-400 leading-relaxed">
+                                Currently in Karachi, diving deeper into education and developing programming skills. Embracing the fast-paced urban environment while building my future in tech.
+                            </p>
+                            <div class="flex items-center gap-2 mt-4 md:justify-end">
+                                <span class="iconify text-slate-500" data-icon="lucide:code-2" data-width="14"></span>
+                                <span class="text-xs text-slate-500">Computer Science & Development</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Dot -->
+                    <div class="absolute left-6 md:left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-red-500 ring-4 ring-black mt-8">
+                        <div class="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-40"></div>
+                    </div>
+                    <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="reveal text-xs font-mono text-red-500 tracking-wider uppercase">03 — Skills</span>
+                <h2 class="reveal text-3xl md:text-5xl font-semibold tracking-tight mt-4 hero-gradient" style="transition-delay: 100ms;">
+                    What I'm Learning
+                </h2>
+                <p class="reveal text-base font-light text-slate-400 mt-4 max-w-xl mx-auto" style="transition-delay: 200ms;">
+                    Continuously expanding my toolkit to build meaningful solutions.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Skill 1 -->
+                <div class="reveal border border-white/[0.06] rounded-2xl p-8 card-hover bg-white/[0.02] group">
+                    <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.1] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="iconify text-red-400" data-icon="lucide:code-2" data-width="20"></span>
+                    </div>
+                    <h3 class="text-xl font-medium tracking-tight mb-3">Programming</h3>
+                    <p class="text-sm font-light text-slate-400 leading-relaxed mb-4">
+                        Building logic and problem-solving skills through hands-on coding projects and algorithmic thinking.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">Python</span>
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">JavaScript</span>
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">HTML/CSS</span>
+                    </div>
+                </div>
+
+                <!-- Skill 2 -->
+                <div class="reveal border border-white/[0.06] rounded-2xl p-8 card-hover bg-white/[0.02] group" style="transition-delay: 100ms;">
+                    <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.1] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="iconify text-red-400" data-icon="lucide:brain" data-width="20"></span>
+                    </div>
+                    <h3 class="text-xl font-medium tracking-tight mb-3">Mathematics</h3>
+                    <p class="text-sm font-light text-slate-400 leading-relaxed mb-4">
+                        Strong foundation in mathematical reasoning, calculus, and algebra — the backbone of computational thinking.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">Calculus</span>
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">Algebra</span>
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">Statistics</span>
+                    </div>
+                </div>
+
+                <!-- Skill 3 -->
+                <div class="reveal border border-white/[0.06] rounded-2xl p-8 card-hover bg-white/[0.02] group" style="transition-delay: 200ms;">
+                    <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.1] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="iconify text-red-400" data-icon="lucide:globe" data-width="20"></span>
+                    </div>
+                    <h3 class="text-xl font-medium tracking-tight mb-3">Web Development</h3>
+                    <p class="text-sm font-light text-slate-400 leading-relaxed mb-4">
+                        Crafting responsive, modern web experiences with clean design and efficient, maintainable code.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">React</span>
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">Tailwind</span>
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">Node.js</span>
+                    </div>
+                </div>
+
+                <!-- Skill 4 -->
+                <div class="reveal border border-white/[0.06] rounded-2xl p-8 card-hover bg-white/[0.02] group" style="transition-delay: 300ms;">
+                    <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.1] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="iconify text-red-400" data-icon="lucide:database" data-width="20"></span>
+                    </div>
+                    <h3 class="text-xl font-medium tracking-tight mb-3">Databases</h3>
+                    <p class="text-sm font-light text-slate-400 leading-relaxed mb-4">
+                        Understanding data structures, queries, and efficient storage solutions for modern applications.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">SQL</span>
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">MongoDB</span>
+                    </div>
+                </div>
+
+                <!-- Skill 5 -->
+                <div class="reveal border border-white/[0.06] rounded-2xl p-8 card-hover bg-white/[0.02] group" style="transition-delay: 400ms;">
+                    <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.1] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="iconify text-red-400" data-icon="lucide:git-branch" data-width="20"></span>
+                    </div>
+                    <h3 class="text-xl font-medium tracking-tight mb-3">Version Control</h3>
+                    <p class="text-sm font-light text-slate-400 leading-relaxed mb-4">
+                        Collaborative development using Git workflows, branching strategies, and code review processes.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">Git</span>
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">GitHub</span>
+                    </div>
+                </div>
+
+                <!-- Skill 6 -->
+                <div class="reveal border border-white/[0.06] rounded-2xl p-8 card-hover bg-white/[0.02] group" style="transition-delay: 500ms;">
+                    <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.1] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="iconify text-red-400" data-icon="lucide:languages" data-width="20"></span>
+                    </div>
+                    <h3 class="text-xl font-medium tracking-tight mb-3">Languages</h3>
+                    <p class="text-sm font-light text-slate-400 leading-relaxed mb-4">
+                        Multilingual communication skills, bridging cultures and connecting with diverse communities.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">Urdu</span>
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">English</span>
+                        <span class="text-xs bg-white/[0.05] border border-white/[0.06] px-3 py-1 rounded-full text-slate-300">Shina</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- Homeland Section -->
+    <section id="homeland" class="py-24 md:py-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="reveal text-xs font-mono text-red-500 tracking-wider uppercase">04 — Homeland</span>
+                <h2 class="reveal text-3xl md:text-5xl font-semibold tracking-tight mt-4 hero-gradient" style="transition-delay: 100ms;">
+                    Gilgit-Baltistan
+                </h2>
+                <p class="reveal text-base font-light text-slate-400 mt-4 max-w-2xl mx-auto" style="transition-delay: 200ms;">
+                    Where the mountains touch the sky and every valley tells a story. My roots, my pride, my paradise.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Image 1 -->
+                <div class="reveal rounded-2xl overflow-hidden border border-white/[0.06] card-hover group">
+                    <div class="relative">
+                        <img src="https://picsum.photos/seed/karakoram-peaks/800/500.jpg" 
+                             alt="Karakoram Mountains" 
+                             class="w-full h-64 md:h-80 object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-lg font-medium tracking-tight">Karakoram Range</h3>
+                            <p class="text-sm text-slate-300 font-light mt-1">Home to K2, the second highest peak</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image 2 -->
+                <div class="reveal rounded-2xl overflow-hidden border border-white/[0.06] card-hover group" style="transition-delay: 100ms;">
+                    <div class="relative">
+                        <img src="https://picsum.photos/seed/hunza-valley-lake/800/500.jpg" 
+                             alt="Hunza Valley" 
+                             class="w-full h-64 md:h-80 object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-lg font-medium tracking-tight">Hunza Valley</h3>
+                            <p class="text-sm text-slate-300 font-light mt-1">The paradise on Earth</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image 3 -->
+                <div class="reveal rounded-2xl overflow-hidden border border-white/[0.06] card-hover group" style="transition-delay: 200ms;">
+                    <div class="relative">
+                        <img src="https://picsum.photos/seed/glacier-pakistan/800/500.jpg" 
+                             alt="Glaciers" 
+                             class="w-full h-64 md:h-80 object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-lg font-medium tracking-tight">Glaciers</h3>
+                            <p class="text-sm text-slate-300 font-light mt-1">Ancient rivers of ice and time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image 4 -->
+                <div class="reveal rounded-2xl overflow-hidden border border-white/[0.06] card-hover group" style="transition-delay: 300ms;">
+                    <div class="relative">
+                        <img src="https://picsum.photos/seed/attabad-lake-blue/800/500.jpg" 
+                             alt="Attabad Lake" 
+                             class="w-full h-64 md:h-80 object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-lg font-medium tracking-tight">Attabad Lake</h3>
+                            <p class="text-sm text-slate-300 font-light mt-1">Turquoise gem in the mountains</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- Colleague / CEO Section -->
+    <section id="colleague" class="py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="reveal text-xs font-mono text-red-500 tracking-wider uppercase">05 — Colleague</span>
+                <h2 class="reveal text-3xl md:text-5xl font-semibold tracking-tight mt-4 hero-gradient" style="transition-delay: 100ms;">
+                    My CEO & Classmate
+                </h2>
+                <p class="reveal text-base font-light text-slate-400 mt-4 max-w-xl mx-auto" style="transition-delay: 200ms;">
+                    The person who leads with vision and inspires with dedication.
+                </p>
+            </div>
+
+            <div class="reveal max-w-4xl mx-auto">
+                <div class="border border-white/[0.06] rounded-2xl overflow-hidden card-hover bg-white/[0.02]">
+                    <div class="grid md:grid-cols-2">
+                        <!-- Photo -->
+                        <div class="relative">
+                            <img src="https://z-cdn-media.chatglm.cn/files/40ac87c3-6845-4c1b-b094-072309ce242a.png?auth_key=1884418802-9ad964239df742c4bf11331a345277ae-0-ca2d2d1b0061795d912340673aa53285" 
+                                 alt="Sikander Shah - CEO" 
+                                 class="w-full h-72 md:h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black/60 hidden md:block"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent md:hidden"></div>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div class="p-8 md:p-10 flex flex-col justify-center">
+                            <div class="inline-flex items-center gap-2 mb-4">
+                                <span class="bg-red-600 text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full">CEO</span>
+                                <span class="bg-white/[0.05] border border-white/[0.1] text-slate-300 text-[10px] font-medium uppercase tracking-wider px-3 py-1 rounded-full">Classmate</span>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-semibold tracking-tight mb-2">Sikander Shah</h3>
+                            <p class="text-sm text-red-400 font-medium mb-4">Chief Executive Officer</p>
+                            <p class="text-sm font-light text-slate-400 leading-relaxed mb-6">
+                                Sikander Shah is not just my CEO — he's a former classmate who has consistently demonstrated excellence in his work. His leadership is defined by a deep understanding of technology, strategic thinking, and an unwavering commitment to quality. 
+                            </p>
+                            <p class="text-sm font-light text-slate-400 leading-relaxed mb-6">
+                                From our classroom days to the professional world, Sikander has always stood out for his dedication, innovative mindset, and ability to turn ideas into reality. He leads by example and inspires everyone around him to push their limits.
+                            </p>
+                            <div class="flex items-center gap-4 pt-4 border-t border-white/[0.06]">
+                                <div class="flex items-center gap-2">
+                                    <span class="iconify text-slate-500" data-icon="lucide:briefcase" data-width="14"></span>
+                                    <span class="text-xs text-slate-400">Entrepreneur</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="iconify text-slate-500" data-icon="lucide:award" data-width="14"></span>
+                                    <span class="text-xs text-slate-400">Exceptional Leader</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="iconify text-slate-500" data-icon="lucide:heart" data-width="14"></span>
+                                    <span class="text-xs text-slate-400">Visionary</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- Quote / Motto Section -->
+    <section class="py-24 md:py-32">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="reveal">
+                <span class="iconify text-red-500 mx-auto mb-8" data-icon="lucide:quote" data-width="40"></span>
+            </div>
+            <blockquote class="reveal text-2xl md:text-4xl font-light tracking-tight leading-snug text-white" style="transition-delay: 100ms;">
+                From the mountains of <span class="text-red-400">Gilgit</span> to the code editors of <span class="text-red-400">Karachi</span> — every line of code is a step toward the future.
+            </blockquote>
+            <p class="reveal text-sm text-slate-500 mt-8" style="transition-delay: 200ms;">— Kamal Abbas</p>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 md:gap-20">
+                <!-- Left -->
+                <div>
+                    <span class="reveal text-xs font-mono text-red-500 tracking-wider uppercase">06 — Contact</span>
+                    <h2 class="reveal text-3xl md:text-5xl font-semibold tracking-tight mt-4 mb-6 hero-gradient" style="transition-delay: 100ms;">
+                        Let's Connect
+                    </h2>
+                    <p class="reveal text-base md:text-lg font-light text-slate-400 leading-relaxed mb-8" style="transition-delay: 200ms;">
+                        Whether you have a project idea, want to collaborate, or just want to say hello — I'd love to hear from you. Let's build something great together.
+                    </p>
+
+                    <div class="reveal space-y-4" style="transition-delay: 300ms;">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.1] flex items-center justify-center">
+                                <span class="iconify text-red-400" data-icon="lucide:map-pin" data-width="18"></span>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500 uppercase tracking-wider">Location</div>
+                                <div class="text-sm text-white">Karachi, Pakistan</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.1] flex items-center justify-center">
+                                <span class="iconify text-red-400" data-icon="lucide:mountain" data-width="18"></span>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500 uppercase tracking-wider">Origin</div>
+                                <div class="text-sm text-white">Gilgit-Baltistan, Pakistan</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.1] flex items-center justify-center">
+                                <span class="iconify text-red-400" data-icon="lucide:mail" data-width="18"></span>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500 uppercase tracking-wider">Email</div>
+                                <div class="text-sm text-white">kamalabbas@email.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right - Contact Form -->
+                <div class="reveal" style="transition-delay: 200ms;">
+                    <form id="contactForm" class="border border-white/[0.06] rounded-2xl p-8 bg-white/[0.02]">
+                        <div class="space-y-5">
+                            <div>
+                                <label class="text-xs text-slate-500 uppercase tracking-wider block mb-2">Your Name</label>
+                                <input type="text" placeholder="John Doe" 
+                                       class="w-full bg-white/[0.05] border border-white/[0.1] rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-all">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-500 uppercase tracking-wider block mb-2">Email Address</label>
+                                <input type="email" placeholder="john@example.com" 
+                                       class="w-full bg-white/[0.05] border border-white/[0.1] rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-all">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-500 uppercase tracking-wider block mb-2">Message</label>
+                                <textarea rows="4" placeholder="Tell me about your project or just say hi..." 
+                                          class="w-full bg-white/[0.05] border border-white/[0.1] rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-all resize-none"></textarea>
+                            </div>
+                            <button type="submit" 
+                                    class="w-full bg-white text-black px-8 py-3.5 rounded-xl text-sm font-semibold hover:bg-slate-200 transition-all duration-150 flex items-center justify-center gap-2 group">
+                                Send Message
+                                <span class="iconify group-hover:translate-x-0.5 transition-transform" data-icon="lucide:arrow-right" data-width="14"></span>
+                            </button>
+                        </div>
+                        <!-- Success Message -->
+                        <div id="formSuccess" class="hidden mt-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-4 py-3 text-sm text-emerald-400 text-center">
+                            <span class="iconify inline-block mr-1" data-icon="lucide:check-circle" data-width="14"></span>
+                            Message sent! I'll get back to you soon.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/[0.06] pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-10 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg width="32" height="32" viewBox="0 0 36 36" class="text-white">
+                            <circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <text x="18" y="23" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">K</text>
+                        </svg>
+                        <span class="text-sm font-semibold tracking-tight">MY SELF</span>
+                    </div>
+                    <p class="text-sm font-light text-slate-500 leading-relaxed">
+                        Personal portfolio of Kamal Abbas — Developer, problem solver, and proud son of Gilgit-Baltistan.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-xs uppercase tracking-wider text-slate-500 font-medium mb-4">Quick Links</h4>
+                    <div class="space-y-3">
+                        <a href="#about" class="block text-sm text-slate-400 hover:text-white transition-colors duration-300">About Me</a>
+                        <a href="#education" class="block text-sm text-slate-400 hover:text-white transition-colors duration-300">Education</a>
+                        <a href="#skills" class="block text-sm text-slate-400 hover:text-white transition-colors duration-300">Skills</a>
+                        <a href="#homeland" class="block text-sm text-slate-400 hover:text-white transition-colors duration-300">Homeland</a>
+                        <a href="#colleague" class="block text-sm text-slate-400 hover:text-white transition-colors duration-300">Colleague</a>
+                    </div>
+                </div>
+
+                <!-- Social -->
+                <div>
+                    <h4 class="text-xs uppercase tracking-wider text-slate-500 font-medium mb-4">Connect</h4>
+                    <div class="flex items-center gap-4">
+                        <a href="#" class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.1] flex items-center justify-center text-slate-400 hover:text-white hover:border-white/[0.2] transition-all duration-300">
+                            <span class="iconify" data-icon="lucide:github" data-width="18"></span>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.1] flex items-center justify-center text-slate-400 hover:text-white hover:border-white/[0.2] transition-all duration-300">
+                            <span class="iconify" data-icon="lucide:linkedin" data-width="18"></span>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.1] flex items-center justify-center text-slate-400 hover:text-white hover:border-white/[0.2] transition-all duration-300">
+                            <span class="iconify" data-icon="lucide:twitter" data-width="18"></span>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.1] flex items-center justify-center text-slate-400 hover:text-white hover:border-white/[0.2] transition-all duration-300">
+                            <span class="iconify" data-icon="lucide:instagram" data-width="18"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-slate-600">© 2025 Kamal Abbas. All rights reserved.</p>
+                <p class="text-xs text-slate-600 flex items-center gap-1">
+                    Built with <span class="iconify text-red-500" data-icon="lucide:heart" data-width="12"></span> from Gilgit-Baltistan
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg shadow-red-600/20 opacity-0 pointer-events-none transition-all duration-300 hover:bg-red-500 z-50">
+        <span class="iconify" data-icon="lucide:arrow-up" data-width="18"></span>
+    </button>
+
+    <script>
+        // Reveal on Scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('flex');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            btn.innerHTML = '<span class="iconify animate-spin" data-icon="lucide:loader-2" data-width="16"></span> Sending...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = 'Send Message <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>';
+                btn.disabled = false;
+                document.getElementById('formSuccess').classList.remove('hidden');
+                this.reset();
+                setTimeout(() => {
+                    document.getElementById('formSuccess').classList.add('hidden');
+                }, 4000);
+            }, 1500);
+        });
+
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+                backToTop.classList.add('opacity-100', 'pointer-events-auto');
+            } else {
+                backToTop.classList.add('opacity-0', 'pointer-events-none');
+                backToTop.classList.remove('opacity-100', 'pointer-events-auto');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Active nav link highlight
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('text-white');
+                link.classList.add('text-slate-400');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('text-white');
+                    link.classList.remove('text-slate-400');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
