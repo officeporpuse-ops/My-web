@@ -1,0 +1,144 @@
+import tkinter as tk
+import random
+import threading
+import time
+import winsound  # Built-in Windows audio library for tense sound effects
+
+class JarvisHackedPrank:
+    def __init__(self, root):
+        self.root = root
+        self.root.attributes('-fullscreen', True)
+        self.root.configure(bg='#02060c')
+        self.root.bind("<Escape>", lambda e: self.root.destroy()) # Press ESC to exit
+
+        self.up_bytes = 0.0
+        self.down_bytes = 0.0
+
+        self.setup_ui()
+        self.start_prank()
+
+    def setup_ui(self):
+        # 1. Main Background Layout
+        self.main_frame = tk.Frame(self.root, bg='#02060c')
+        self.main_frame.pack(fill='both', expand=True)
+
+        # 2. Side Panel - Left: Uploading Data Stream
+        self.left_panel = tk.Frame(self.main_frame, bg='#02060c')
+        self.left_panel.place(relx=0.02, rely=0.05, relwidth=0.28, relheight=0.9)
+        
+        tk.Label(self.left_panel, text="▲ EXFILTRATING (UPLOADING)", font=("Consolas", 11, "bold"), fg="#ff003c", bg="#02060c").pack(anchor='w')
+        self.up_text_box = tk.Text(self.left_panel, bg='#02060c', fg='#ff3366', font=("Consolas", 9), wrap='none', borderwidth=0, state='disabled')
+        self.up_text_box.pack(fill='both', expand=True, pady=5)
+
+        # 3. Side Panel - Right: Downloading Payload Stream
+        self.right_panel = tk.Frame(self.main_frame, bg='#02060c')
+        self.right_panel.place(relx=0.70, rely=0.05, relwidth=0.28, relheight=0.9)
+
+        tk.Label(self.right_panel, text="▼ INJECTING (DOWNLOADING)", font=("Consolas", 11, "bold"), fg="#00f0ff", bg="#02060c").pack(anchor='e')
+        self.down_text_box = tk.Text(self.right_panel, bg='#02060c', fg='#00f0ff', font=("Consolas", 9), wrap='none', borderwidth=0, state='disabled')
+        self.down_text_box.pack(fill='both', expand=True, pady=5)
+
+        # 4. Center JARVIS Emergency HUD Window
+        self.hud_box = tk.Frame(self.main_frame, bg='#40000a', highlightbackground='#ff003c', highlightthickness=3)
+        self.hud_box.place(relx=0.5, rely=0.5, anchor='center', width=520, height=360)
+
+        tk.Label(self.hud_box, text="J.A.R.V.I.S. PROTOCOL // OVERRIDE DETECTED", font=("Consolas", 10, "bold"), fg="#ff5500", bg="#40000a").pack(pady=(15, 5))
+        tk.Label(self.hud_box, text="SECURITY SYSTEM BREACHED", font=("Consolas", 18, "bold"), fg="white", bg="#40000a").pack()
+
+        self.alert_status = tk.Label(self.hud_box, text="YOU ARE HACKED!", font=("Consolas", 22, "bold"), fg="#ff003c", bg="#40000a")
+        self.alert_status.pack(pady=15)
+
+        tk.Label(self.hud_box, text="STARK NET ROOT ACCESS GRANTED\nCRITICAL DATA EXFILTRATION IN PROGRESS", font=("Consolas", 10), fg="#a0c0d0", bg="#40000a").pack()
+
+        # 5. Dual Transfer Progress Monitors
+        self.stats_frame = tk.Frame(self.hud_box, bg="#40000a")
+        self.stats_frame.pack(fill='x', padx=20, pady=20)
+
+        # Upload Stat
+        self.up_label = tk.Label(self.stats_frame, text="UPLOAD: 0.00 GB / 4.20 GB", font=("Consolas", 10, "bold"), fg="#ff3366", bg="#40000a")
+        self.up_label.pack(side='left')
+
+        # Download Stat
+        self.down_label = tk.Label(self.stats_frame, text="DOWNLOAD: 0.00 GB / 1.50 GB", font=("Consolas", 10, "bold"), fg="#00f0ff", bg="#40000a")
+        self.down_label.pack(side='right')
+
+    def start_prank(self):
+        # Start Threading for Fast Animations & Audio
+        threading.Thread(target=self.stream_upload_code, daemon=True).start()
+        threading.Thread(target=self.stream_download_code, daemon=True).start()
+        threading.Thread(target=self.play_alarm_audio, daemon=True).start()
+        
+        self.update_stats()
+        self.flash_hud()
+
+    def stream_upload_code(self):
+        logs = [
+            "UPLOADING: /DCIM/Photos/IMG_9042.jpg...", "EXTRACTING: Keychain_Passwords.db",
+            "UPLOADING: /WhatsApp/Databases/msgstore.db", "EXFILTRATING: Banking_Tokens.dat",
+            "READING: Contacts_vCard_List.vcf", "PACKING: /Documents/Private_Keys/",
+            "UPLOADING: Session_Cookies_Chrome.bin", "EXFILTRATING: Device_IMEI_Dump.log"
+        ]
+        while True:
+            log = random.choice(logs)
+            self.root.after(0, lambda l=log: self.append_code(self.up_text_box, l))
+            time.sleep(0.04) # Rapid upward streaming speed
+
+    def stream_download_code(self):
+        logs = [
+            "DOWNLOADING: Root_Exploit_v9.2.bin", "INJECTING: Darknet_Payload_Module",
+            "DOWNLOADING: Cryptolocker_Payload.exe", "EXECUTING: Remote_Shell_Override",
+            "FETCHING: Trojan_Hardware_Control.sys", "DOWNLOADING: Firmware_Flash_Kernel",
+            "INSTALLING: Keylogger_Daemon_v4", "DOWNLOADING: ZeroDay_Buffer_Bypass"
+        ]
+        while True:
+            log = random.choice(logs)
+            self.root.after(0, lambda l=log: self.append_code(self.down_text_box, l))
+            time.sleep(0.05)
+
+    def append_code(self, text_widget, line):
+        text_widget.config(state='normal')
+        text_widget.insert('end', line + '\n')
+        text_widget.see('end')
+        text_widget.config(state='disabled')
+        if int(text_widget.index('end-1c').split('.')[0]) > 40:
+            text_widget.config(state='normal')
+            text_widget.delete('1.0', '2.0')
+            text_widget.config(state='disabled')
+
+    def update_stats(self):
+        if self.up_bytes < 4.20:
+            self.up_bytes += random.uniform(0.02, 0.08)
+            self.up_label.config(text=f"UPLOAD: {self.up_bytes:.2f} GB / 4.20 GB")
+
+        if self.down_bytes < 1.50:
+            self.down_bytes += random.uniform(0.01, 0.05)
+            self.down_label.config(text=f"DOWNLOAD: {self.down_bytes:.2f} GB / 1.50 GB")
+
+        # Cycle Status Text
+        msgs = ["YOU ARE HACKED!", "STARK NET OVERRIDDEN", "EXFILTRATING DATA...", "UNAUTHORIZED ROOT ACCESS"]
+        self.alert_status.config(text=random.choice(msgs))
+
+        self.root.after(200, self.update_stats)
+
+    def flash_hud(self):
+        curr_bg = self.hud_box.cget("bg")
+        next_bg = "#700010" if curr_bg == "#40000a" else "#40000a"
+        self.hud_box.config(bg=next_bg)
+        for widget in [self.hud_box, self.stats_frame]:
+            widget.config(bg=next_bg)
+        for child in self.hud_box.winfo_children():
+            if isinstance(child, tk.Label):
+                child.config(bg=next_bg)
+        self.root.after(250, self.flash_hud)
+
+    def play_alarm_audio(self):
+        # Tense computer beeps and siren sounds using Windows sound driver
+        while True:
+            winsound.Beep(400, 150)
+            winsound.Beep(800, 150)
+            time.sleep(0.2)
+
+if __name__ == '__main__':
+    root = tk.Tk()
+    app = JarvisHackedPrank(root)
+    root.mainloop()
